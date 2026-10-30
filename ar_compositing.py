@@ -1,3 +1,8 @@
+# ====================================================================
+# ar_compositing.py - green screen without a green screen: an AI model
+# (MediaPipe selfie segmenter) cuts you out of your background in real
+# time so you can be placed over anything.
+# ====================================================================
 import cv2
 import mediapipe as mp
 from mediapipe.tasks import python

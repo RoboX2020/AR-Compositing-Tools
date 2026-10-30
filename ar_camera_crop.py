@@ -1,3 +1,8 @@
+# ====================================================================
+# ar_camera_crop.py - cameraman-free filming: the webcam follows your hand
+# and automatically crops/zooms the frame to keep you (or what you point
+# at) centered, like a camera operator.
+# ====================================================================
 import cv2
 import mediapipe as mp
 from mediapipe.tasks import python

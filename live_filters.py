@@ -1,3 +1,8 @@
+# ====================================================================
+# live_filters.py - webcam fun-mirror filters (anime, x-ray, thermal,
+# neon edges and friends): each filter is a small OpenCV recipe applied
+# to every frame.
+# ====================================================================
 import cv2
 import mediapipe as mp
 from mediapipe.tasks import python
