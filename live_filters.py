@@ -18,6 +18,7 @@ MODEL_PATH = "hand_landmarker.task"
 # Filter Functions
 # ─────────────────────────────────────────────
 
+# # Cartoon look: flatten colors, boost vividness, ink black outlines.
 def anime_filter(frame):
     """Convert to anime/cartoon style: smooth colors + bold edges."""
     # Bilateral filter for smooth flat colors
@@ -46,6 +47,7 @@ def anime_filter(frame):
     return result
 
 
+# # X-ray look: inverted grayscale, boosted contrast, cold blue tint + glow.
 def xray_filter(frame):
     """Simulate X-ray / radiograph look."""
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -81,6 +83,7 @@ def xray_filter(frame):
     return colored
 
 
+# # Fake heat camera: brightness becomes color (blue = cold, red = hot).
 def thermal_filter(frame):
     """Thermal / infrared camera look."""
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -94,6 +97,7 @@ def thermal_filter(frame):
     return thermal
 
 
+# # Neon look: only the outlines, glowing on a near-black scene.
 def neon_edges_filter(frame):
     """Glowing neon edge detection effect."""
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -127,6 +131,8 @@ def neon_edges_filter(frame):
     return result
 
 
+# # Pencil sketch: divide the image by its blurred negative - lit areas go
+# # white, edges stay dark like pencil strokes.
 def pencil_sketch_filter(frame):
     """Pencil sketch / drawing effect."""
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -142,6 +148,7 @@ def pencil_sketch_filter(frame):
     return colored
 
 
+# # Oil painting: heavy edge-preserving smoothing + richer colors + outlines.
 def oil_painting_filter(frame):
     """Oil painting effect."""
     # Heavy bilateral filtering for painterly look
@@ -164,6 +171,8 @@ def oil_painting_filter(frame):
     return result
 
 
+# # Pixel art: shrink to a tiny grid, reduce colors, blow back up with hard
+# # square pixels - instant 8-bit.
 def pixel_art_filter(frame):
     """Retro pixel art / 8-bit effect."""
     pixel_size = 8
@@ -179,6 +188,8 @@ def pixel_art_filter(frame):
     return result
 
 
+# # Glitch: shift color channels sideways, shove random strips, sometimes
+# # invert a block - digital corruption on purpose.
 def glitch_filter(frame):
     """RGB channel shift glitch effect."""
     h, w = frame.shape[:2]
@@ -227,6 +238,8 @@ FILTERS = [
 # ─────────────────────────────────────────────
 # Order quad corners: TL, TR, BR, BL
 # ─────────────────────────────────────────────
+# # Sort 4 corner points into a consistent top-left, top-right,
+# # bottom-right, bottom-left order (needed before warping a crop).
 def order_quad(pts):
     """Order 4 points as top-left, top-right, bottom-right, bottom-left."""
     pts = sorted(pts, key=lambda p: p[1])  # Sort by Y

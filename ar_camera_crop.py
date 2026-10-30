@@ -17,6 +17,8 @@ MODEL_PATH = "hand_landmarker.task"
 # ─────────────────────────────────────────────
 # Threaded Camera Capture
 # ─────────────────────────────────────────────
+# # Reads webcam frames on a background thread so the main loop never waits
+# # on the camera - the display stays smooth even if a frame is slow.
 class ThreadedCamera:
     def __init__(self, src=0, name="Camera"):
         self.cap = cv2.VideoCapture(src)
@@ -59,6 +61,8 @@ class ThreadedCamera:
 # ─────────────────────────────────────────────
 # Geometry Helpers
 # ─────────────────────────────────────────────
+# # Sort 4 corner points into a consistent top-left, top-right,
+# # bottom-right, bottom-left order (needed before warping a crop).
 def order_quad(pts):
     """Order 4 points to top-left, top-right, bottom-right, bottom-left."""
     pts = sorted(pts, key=lambda p: p[1])  # Sort by Y

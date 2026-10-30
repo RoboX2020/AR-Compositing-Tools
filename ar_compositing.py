@@ -19,6 +19,8 @@ MODEL_URL = "https://storage.googleapis.com/mediapipe-models/image_segmenter/sel
 # ─────────────────────────────────────────────
 # Threaded Camera Capture
 # ─────────────────────────────────────────────
+# # Reads webcam frames on a background thread so the main loop never waits
+# # on the camera - the display stays smooth even if a frame is slow.
 class ThreadedCamera:
     def __init__(self, src=0, name="Camera"):
         self.cap = cv2.VideoCapture(src)
